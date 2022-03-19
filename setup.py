@@ -11,7 +11,7 @@ classifiers = [
 setup(
     name='risk-modeling-tools',
     version='0.0.1',
-    description='Tools for making credit risk scoring models',
+    description='Tools for making credit risk scoring models and portfolio management',
     long_description=open('README.md').read() + '\n\n' + open('CHANGELOG.txt').read(),
     url='',
     author='Mikhail Gritskikh',

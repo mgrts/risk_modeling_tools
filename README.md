@@ -205,15 +205,15 @@ Use this space to list resources you find helpful and would like to give credit 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/risk_modeling_tools.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/risk_modeling_tools/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/risk_modeling_tools.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/risk_modeling_tools/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/risk_modeling_tools.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/risk_modeling_tools/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/risk_modeling_tools.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/risk_modeling_tools/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/risk_modeling_tools.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/risk_modeling_tools/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/mgrts/risk_modeling_tools.svg?style=for-the-badge
+[contributors-url]: https://github.com/mgrts/risk_modeling_tools/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/mgrts/risk_modeling_tools.svg?style=for-the-badge
+[forks-url]: https://github.com/mgrts/risk_modeling_tools/network/members
+[stars-shield]: https://img.shields.io/github/stars/mgrts/risk_modeling_tools.svg?style=for-the-badge
+[stars-url]: https://github.com/mgrts/risk_modeling_tools/stargazers
+[issues-shield]: https://img.shields.io/github/issues/mgrts/risk_modeling_tools.svg?style=for-the-badge
+[issues-url]: https://github.com/mgrts/risk_modeling_tools/issues
+[license-shield]: https://img.shields.io/github/license/mgrts/risk_modeling_tools.svg?style=for-the-badge
+[license-url]: https://github.com/mgrts/risk_modeling_tools/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/mikhail-gritskikh-123b231a3
