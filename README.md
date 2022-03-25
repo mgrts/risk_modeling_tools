@@ -97,16 +97,11 @@ Here are the libraries used for the project.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+For using the library you need the following things
+* python 3
+* install pip or clone the git repository
 
 ### Installation
 
@@ -124,7 +119,7 @@ Bellow is the installation command using pip
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples 
+The library may be used for scoring models developing and credit risk analysis
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -134,14 +129,9 @@ Use this space to show useful examples of how a project can be used. Additional 
 ## Roadmap
 
 - [x] Add Changelog
-- [x] Add back to top links
 - [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/mgrts/risk_modeling_tools) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -177,7 +167,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Mikhail Gritskikh - [@your_twitter](https://twitter.com/your_username) - m.gritskikh@gmail.com
+Mikhail Gritskikh - [@m_gritskikh](https://twitter.com/m_gritskikh) - m.gritskikh@gmail.com
 
 Project Link: [https://github.com/mgrts/risk_modeling_tools](https://github.com/mgrts/risk_modeling_tools)
 
@@ -188,16 +178,10 @@ Project Link: [https://github.com/mgrts/risk_modeling_tools](https://github.com/
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+Some useful links for better understanding
 
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
+* [Score Cards](https://medium.com/@yanhuiliu104/credit-scoring-scorecard-development-process-8554c3492b2b)
+* [WoE and IV](https://www.analyticsvidhya.com/blog/2021/06/understand-weight-of-evidence-and-information-value/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

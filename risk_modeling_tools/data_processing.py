@@ -44,7 +44,7 @@ def bins_to_dummies(X_bin, X_train, y_train, num_features, cat_features):
     :param X_train: Pandas Dataframe of binarized train data
     :param y_train: Pandas Series of train data target
     :param num_features: list of numerical features names
-    :param num_features: list of categorical features names
+    :param cat_features: list of categorical features names
     :return: bins dummies DataFrame
     """
 

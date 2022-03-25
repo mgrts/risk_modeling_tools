@@ -5,12 +5,29 @@ from risk_modeling_tools.binning.binning_algorithms import Binning
 
 
 def paired_correlations(df):
+    """
+    Calculates paired Pearson's correlations for dataframe
+
+    :param df: dataframe of numerical features
+    :return: Pandas DataFrame of paired correlations
+    """
+
     correlations = df.corr().abs().unstack().sort_values().reset_index()
     correlations = correlations[correlations['level_0'] != correlations['level_1']]
     return correlations
 
 
 def drop_correlated_features(X, y, threshold=0.6):
+    """
+    Iteratively drops highly correlated features from dataframe
+    feature to drop takes by minimal IV
+
+    :param X: Pandas DataFrame of numerical features
+    :param y: Pandas Series binary target
+    :param threshold: correlation threshold
+    :return: Pandas DataFrame of non-correlated features
+    """
+
     no_corr_df = X.copy()
     correlations = paired_correlations(no_corr_df)
     features = (correlations.iloc[-1]['level_0'], correlations.iloc[-1]['level_1'])
@@ -33,6 +50,16 @@ def drop_correlated_features(X, y, threshold=0.6):
 
 
 def drop_unstable_features(X, y, date, n_periods=10, threshold=0.9):
+    """
+    Drops unstable features from dataframe
+
+    :param X: Pandas DataFrame of features
+    :param y: Pandas Series binary target
+    :param n_periods: number of periods for stability index calculation
+    :param threshold: stability index threshold
+    :return: Pandas DataFrame of non-correlated features
+    """
+
     stable_features = []
     periods = pd.qcut(date.rank(method='dense'), n_periods, duplicates='drop')
     indexes = [periods[periods == p].index for p in sorted(periods.unique())]
@@ -58,6 +85,14 @@ def drop_unstable_features(X, y, date, n_periods=10, threshold=0.9):
 
 
 def iv_report(X, y):
+    """
+    Information Value calculation for features
+
+    :param X: Pandas DataFrame of features
+    :param y: Pandas Series binary target
+    :return: Pandas DataFrame of IV
+    """
+
     binning = Binning()
     bin_df = binning.fit_transform(X, y)
 
@@ -69,6 +104,18 @@ def iv_report(X, y):
 
 
 def train_logistic_regression(X_train, y_train, X_val, y_val, min_coef=1, max_iter=2000):
+    """
+    Logistic regression training algorithm on binary features
+
+    :param X_train: Pandas DataFrame of train set features
+    :param y_train: Pandas Series of train set binary target
+    :param X_val: Pandas DataFrame of validation set features
+    :param y_val: Pandas Series of validation set binary target
+    :param min_coef: minimal absolute coefficient value to keep feature in model
+    :param max_iter: maximum number of iterations to converge
+    :return: Pandas DataFrame of ginies on every iteration, list of feature sets, list of models
+    """
+
     X_train_short = X_train.copy()
     X_val_short = X_val.copy()
 
@@ -106,7 +153,3 @@ def train_logistic_regression(X_train, y_train, X_val, y_val, min_coef=1, max_it
     })
 
     return results_df, feature_sets, models
-
-
-
-

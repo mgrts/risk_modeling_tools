@@ -4,7 +4,7 @@ import pandas as pd
 
 class NumericalBin(pd.Interval):
     """
-    A class used to represent a bin a of numerical feature
+    A class used to represent a bin of numerical feature
 
     ...
 
