@@ -13,7 +13,7 @@ setup(
     version='0.0.1',
     description='Tools for credit risk scoring models development and portfolio management',
     long_description=open('README.md').read() + '\n\n' + open('CHANGELOG.txt').read(),
-    url='',
+    url='https://github.com/mgrts/risk_modeling_tools',
     author='Mikhail Gritskikh',
     author_email='m.gritskikh@gmail.com',
     license='MIT',
