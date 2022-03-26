@@ -1,6 +1,6 @@
-from constants import *
+from .constants import *
 import pandas as pd
-from risk_modeling_tools.binning.binning_utils import get_bins_map
+from .binning.binning_utils import get_bins_map
 
 
 def process_data(df, num_columns=None, cat_columns=None,

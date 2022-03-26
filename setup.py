@@ -10,7 +10,7 @@ classifiers = [
 
 setup(
     name='risk-modeling-tools',
-    version='0.0.1',
+    version='0.0.2',
     description='Tools for credit risk scoring models development and portfolio management',
     long_description=open('README.md').read() + '\n\n' + open('CHANGELOG.txt').read(),
     long_description_content_type='text/markdown',
