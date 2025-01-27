@@ -52,17 +52,17 @@ def bins_to_dummies(X_bin, X_train, y_train, num_features, cat_features):
     assert (set(features) == set(X_train.columns))
     assert(set(features) == set(num_features + cat_features))
 
-    binary_df = pd.DataFrame(index=X_bin)
+    binary_df = pd.DataFrame(index=X_bin.index)
     bins_maps = []
 
     for feature in features:
         x_train = X_train[feature]
-        target_rate = y_train.groupby(x_train).mean()
+        target_rate = y_train.groupby(x_train, sort=False).mean()
         share = x_train.value_counts(normalize=True)
         bins_map = get_bins_map(
             target_rate.index,
-            target_rate.values,
-            [share[b] for b in target_rate.index]
+            target_rate,
+            share
         )
         bins_maps.append(bins_map)
 
@@ -71,7 +71,7 @@ def bins_to_dummies(X_bin, X_train, y_train, num_features, cat_features):
         else:
             bins = list(bins_map.keys())
 
-        ranks = [i for i in len(bins)]
+        ranks = [i for i in range(len(bins))]
         ranks_dct = dict(zip(bins, ranks))
         x_rank = X_bin[feature].replace(ranks_dct)
         for rank in ranks:

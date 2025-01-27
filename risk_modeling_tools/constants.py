@@ -3,3 +3,4 @@ CAT_NA_VALUE = 'no data'
 CAT_EMPTY_VALUE = 'empty string'
 MIN_SHARE = 0.06
 MIN_DIFF = 0.03
+MAX_BINS = 7

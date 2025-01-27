@@ -3,7 +3,22 @@ from .bin_classes import NumericalBin
 from risk_modeling_tools.constants import *
 
 
-def binarize_categorical_feature(x, y, min_share=MIN_SHARE, min_diff=MIN_DIFF):
+def reduce_categorical_bins(x, y, max_bins=MAX_BINS):
+    x = x.copy()
+    n_bins = x.nunique()
+    while n_bins > n_bins:
+        y_rate = y.groupby(x, sort=False).mean().sort_values()
+        y_rate_diff = y_rate.diff()
+        min_diff_idx = y_rate_diff.argmin()
+        prev_bin = y_rate_diff.index[min_diff_idx - 1]
+        curr_bin = y_rate_diff.index[min_diff_idx]
+        prev_bin.merge(curr_bin)
+        x = x.apply(lambda el: prev_bin if el is curr_bin else el)
+        n_bins = x.nunique()
+    return x
+
+
+def binarize_categorical_feature(x, y, min_share=MIN_SHARE, min_diff=MIN_DIFF, max_bins=MAX_BINS):
     """
     Binning algorithm for categorical feature
 
@@ -55,10 +70,27 @@ def binarize_categorical_feature(x, y, min_share=MIN_SHARE, min_diff=MIN_DIFF):
             prev_bin.merge(curr_bin)
             x = x.apply(lambda el: prev_bin if el is curr_bin else el)
 
+    x = reduce_categorical_bins(x, y, max_bins=max_bins)
+
     return x
 
 
-def binarize_numerical_feature(x, y, min_share=MIN_SHARE, min_diff=MIN_DIFF):
+def reduce_numerical_bins(x, y, max_bins=MAX_BINS):
+    x = x.copy()
+    n_bins = x.nunique()
+    while n_bins > n_bins:
+        y_rate = y.groupby(x).mean()
+        y_rate_diff = y_rate.diff().abs()
+        min_diff_idx = y_rate_diff.argmin()
+        prev_bin = y_rate_diff.index[min_diff_idx - 1]
+        curr_bin = y_rate_diff.index[min_diff_idx]
+        new_bin = NumericalBin(prev_bin.left, curr_bin.right)
+        x = x.apply(lambda a: new_bin if a in (prev_bin, curr_bin) else a)
+        n_bins = x.nunique()
+    return x
+
+
+def binarize_numerical_feature(x, y, min_share=MIN_SHARE, min_diff=MIN_DIFF, max_bins=MAX_BINS):
     """
     Binning algorithm for numerical feature
 
@@ -135,6 +167,8 @@ def binarize_numerical_feature(x, y, min_share=MIN_SHARE, min_diff=MIN_DIFF):
         min_y_rate_diff_idx = y_rate_diff.argmin()
         min_y_rate_diff = y_rate_diff.iloc[min_y_rate_diff_idx]
 
+    x_binarized = reduce_numerical_bins(x_binarized, y, max_bins=max_bins)
+
     return x_binarized
 
 
@@ -205,12 +239,13 @@ class Binning:
         Sequentially performs fit and transform methods
     """
 
-    def __init__(self, min_share=MIN_SHARE, min_diff=MIN_DIFF):
+    def __init__(self, min_share=MIN_SHARE, min_diff=MIN_DIFF, max_bins=MAX_BINS):
         self.num_features = None
         self.cat_features = None
         self.bins_maps = {}
         self.min_share = min_share
         self.min_diff = min_diff
+        self.max_bins = max_bins
         self.fitted = False
 
     def fit(self, X, y, num_features=None, cat_features=None):
@@ -238,12 +273,18 @@ class Binning:
         features = X.columns
         for feature in features:
             if feature in self.cat_features:
-                x_bin = binarize_categorical_feature(X[feature], y, min_share=self.min_share, min_diff=self.min_diff)
+                x_bin = binarize_categorical_feature(X[feature], y,
+                                                     min_share=self.min_share,
+                                                     min_diff=self.min_diff,
+                                                     max_bins=self.max_bins)
                 if type(x_bin) == int:
                     continue
                 target_rate = y.groupby(x_bin, sort=False).mean().sort_values()
             elif feature in self.num_features:
-                x_bin = binarize_numerical_feature(X[feature], y, min_share=self.min_share, min_diff=self.min_diff)
+                x_bin = binarize_numerical_feature(X[feature], y,
+                                                   min_share=self.min_share,
+                                                   min_diff=self.min_diff,
+                                                   max_bins=self.max_bins)
                 if type(x_bin) == int:
                     continue
                 target_rate = y.groupby(x_bin).mean()
@@ -270,7 +311,7 @@ class Binning:
             features = X.columns
             for feature in features:
                 if feature in self.cat_features:
-                    x_type = 'object'
+                    x_type = 'categorical'
                 else:
                     x_type = None
                 bin_map = self.bins_maps.get(feature)
@@ -297,4 +338,5 @@ class Binning:
         :return: transformed features, unknown columns will be dropped
         """
         self.fit(X, y, num_features=num_features, cat_features=cat_features)
-        self.transform(X, y, na_bin=na_bin, cat_na_value=cat_na_value, num_na_value=num_na_value)
+        X_transformed = self.transform(X, na_bin=na_bin, cat_na_value=cat_na_value, num_na_value=num_na_value)
+        return X_transformed
